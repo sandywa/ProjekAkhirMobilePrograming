@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
+import 'listHeroes.dart';
+
 class loginPage extends StatelessWidget {
-  String username="";
-  String password="";
+  String username = "";
+  String password = "";
 
   loginPage({Key? key}) : super(key: key);
 
@@ -19,7 +21,7 @@ class loginPage extends StatelessWidget {
             _username(),
             _password(),
             _loginButton(context),
-
+            _guestButton(context),
           ],
         ),
       ),
@@ -31,7 +33,7 @@ class loginPage extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
       child: TextFormField(
         enabled: true,
-        onChanged: (value){
+        onChanged: (value) {
           username = value;
         },
         decoration: const InputDecoration(
@@ -43,12 +45,13 @@ class loginPage extends StatelessWidget {
       ),
     );
   }
+
   Widget _password() {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
       child: TextFormField(
         enabled: true,
-        onChanged: (value){
+        onChanged: (value) {
           password = value;
         },
         obscureText: true,
@@ -62,18 +65,18 @@ class loginPage extends StatelessWidget {
     );
   }
 
-  Widget _loginButton(BuildContext context){
+  Widget _loginButton(BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
       width: MediaQuery.of(context).size.width,
       child: ElevatedButton(
-        onPressed: (){
+        onPressed: () {
           //tempat buat menjalankan logic dari button
           String text = "";
-          if(username =="Flutter" && password =="123"){
+          if (username == "Flutter" && password == "123") {
             text = 'Login Berhasil';
-          }else{
-            text='login gagal';
+          } else {
+            text = 'login gagal';
           }
           SnackBar snackBar = SnackBar(
             content: Text(text),
@@ -84,9 +87,24 @@ class loginPage extends StatelessWidget {
       ),
     );
   }
-  Widget _logoImage(){
-    return Container(
 
+  Widget _guestButton(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+      child: ElevatedButton(
+        onPressed: () {
+          //tempat buat menjalankan logic dari button
+          Navigator.push(context, MaterialPageRoute(builder: (context) {
+            return listHeroes();
+          }));
+
+        },
+        child: const Text('as Guest'),
+      ),
     );
+  }
+
+  Widget _logoImage() {
+    return Container();
   }
 }
